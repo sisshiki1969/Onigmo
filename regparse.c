@@ -2696,30 +2696,28 @@ fetch_name(OnigCodePoint start_code, UChar** src, UChar* end,
       name_end = p;
       PFETCH_S(c);
       if (c == end_code || c == ')') {
-	if (is_num == 2) {
-	  r = ONIGERR_INVALID_GROUP_NAME;
-	  goto teardown;
-	}
-	break;
+	      if (is_num == 2) {
+	        r = ONIGERR_INVALID_GROUP_NAME;
+	        goto teardown;
+	      }
+	      break;
       }
 
       if (is_num != 0) {
-	if (ONIGENC_IS_CODE_DIGIT(enc, c)) {
-	  is_num = 1;
-	}
-	else {
-	  if (!ONIGENC_IS_CODE_WORD(enc, c))
-	    r = ONIGERR_INVALID_CHAR_IN_GROUP_NAME;
-	  else
-	    r = ONIGERR_INVALID_GROUP_NAME;
-	  goto teardown;
-	}
-      }
-      else {
-	if (!ONIGENC_IS_CODE_NAME(enc, c)) {
-	  r = ONIGERR_INVALID_CHAR_IN_GROUP_NAME;
-	  goto teardown;
-	}
+	      if (ONIGENC_IS_CODE_DIGIT(enc, c)) {
+	        is_num = 1;
+	      } else {
+	        if (!ONIGENC_IS_CODE_WORD(enc, c))
+	          r = ONIGERR_INVALID_CHAR_IN_GROUP_NAME;
+	        else
+	          r = ONIGERR_INVALID_GROUP_NAME;
+	          goto teardown;
+	      }
+      } else {
+	      //if (!ONIGENC_IS_CODE_NAME(enc, c)) {
+	      //  r = ONIGERR_INVALID_CHAR_IN_GROUP_NAME;
+	      //  goto teardown;
+	      //}
       }
     }
 
